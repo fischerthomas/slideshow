@@ -1,0 +1,61 @@
+// Sass config file
+// (you should comment this line and move config file from vendor/knacss folder to your own folder)
+
+@import "_base.scss";
+
+
+.slideshow{
+	position: relative;
+	display: block;
+	overflow: hidden;
+	figure{
+		position: absolute;
+		opacity: 0;
+		transition: 1s opacity;
+		top: 0;
+	}
+	figcaption{
+		position: absolute;
+	}
+	ul>li{
+		display: inline-block;
+		width: 9px;
+  		height: 9px;
+	}
+	nav li > a{
+		display: inline-block;
+		width: 9px;
+  		height: 9px;
+		background: rgba(0,0,0, 1);
+		border-radius: 15px;
+	}
+	figure.show{
+	opacity: 1;
+	position: static;
+	transition: 1s opacity;
+	}
+	.wrapper, nav{
+		display: inline-block;
+	}
+	nav{
+		display:block;
+		position: relative;
+		width: 400px;
+		height: 100px;
+		bottom: 0;
+	}
+	.prev, .next{
+		display: inline-block;
+		cursor: pointer;
+		width: 150px;
+		height: 50px;
+	}
+
+	.prev a, .next a{
+		cursor: pointer;
+		width: 150px;
+		height: 50px;
+	}
+
+}
+
