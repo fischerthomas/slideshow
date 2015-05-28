@@ -102,7 +102,7 @@ a {
   height: 9px;
 }
 /* line 25, ../sass/styles.scss */
-.slideshow nav li > a {
+.slideshow nav.bullets li > a {
   display: inline-block;
   width: 9px;
   height: 9px;
