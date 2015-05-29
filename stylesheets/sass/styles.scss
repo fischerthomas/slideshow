@@ -1,13 +1,39 @@
+/* Context */
+html {
+  font-size: 100%;
+  font-size: 1em; // for mobile
+} 
+
+body {
+  font-size: 1em;
+}
+
+
+#container{
+	width: 100%;
+	display: inline-block;
+	text-align: center;
+}
+
+/* Slideshow */
+
 // Sass config file
 // (you should comment this line and move config file from vendor/knacss folder to your own folder)
 
 @import "_base.scss";
 
+// vars
 
-.slideshow{
+$slideshow-width: 50%;
+$bullet-color: rgba(163,163,163, 1);
+$bullet-size: 1rem;
+
+
+#slideshow{
 	position: relative;
-	display: block;
+	display: inline-block;
 	overflow: hidden;
+	width: $slideshow-width;
 	figure{
 		position: absolute;
 		opacity: 0;
@@ -17,32 +43,35 @@
 	figcaption{
 		position: absolute;
 	}
-	ul>li{
+	.wrapper, nav{
 		display: inline-block;
-		width: 9px;
-  		height: 9px;
 	}
-	nav.bullets li > a{
+	nav{
+		position: relative;
+		width: 100%;
+		text-align: center;
+	}
+	nav > ul > li{
 		display: inline-block;
-		width: 9px;
-  		height: 9px;
-		background: rgba(0,0,0, 1);
+		width: $bullet-size;
+		height: $bullet-size;
+  		list-style-type: none;
+	}
+	nav li > a{
+		display: inline-block;
+		width: 50%;
+		height: 50%;
+		background: $bullet-color;
 		border-radius: 15px;
+		&.active{
+			background: darken($bullet-color, 30% );
+			transition: background 1s;
+		}
 	}
 	figure.show{
 	opacity: 1;
 	position: static;
 	transition: 1s opacity;
-	}
-	.wrapper, nav{
-		display: inline-block;
-	}
-	nav{
-		display:block;
-		position: relative;
-		width: 400px;
-		height: 100px;
-		bottom: 0;
 	}
 	.prev, .next{
 		display: inline-block;
