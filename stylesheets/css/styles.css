@@ -19,7 +19,7 @@ body {
 
 /* Slideshow */
 /* reset */
-/* line 5, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 5, ../../../../../Ruby21-x64/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -41,45 +41,45 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../Ruby21-x64/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../Ruby21-x64/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../Ruby21-x64/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../Ruby21-x64/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../Ruby21-x64/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../Ruby21-x64/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../Ruby21-x64/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../../Ruby21-x64/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block;
 }
@@ -99,42 +99,42 @@ a {
 }
 
 /* line 32, ../sass/styles.scss */
-#slideshow {
+.slideshow {
   position: relative;
   display: inline-block;
   overflow: hidden;
   width: 50%;
 }
 /* line 37, ../sass/styles.scss */
-#slideshow figure {
+.slideshow figure {
   position: absolute;
   opacity: 0;
   transition: 1s opacity;
   top: 0;
 }
 /* line 43, ../sass/styles.scss */
-#slideshow figcaption {
+.slideshow figcaption {
   position: absolute;
 }
 /* line 46, ../sass/styles.scss */
-#slideshow .wrapper, #slideshow nav {
+.slideshow .wrapper, .slideshow nav {
   display: inline-block;
 }
 /* line 49, ../sass/styles.scss */
-#slideshow nav {
+.slideshow nav {
   position: relative;
   width: 100%;
   text-align: center;
 }
 /* line 54, ../sass/styles.scss */
-#slideshow nav > ul > li {
+.slideshow nav > ul > li {
   display: inline-block;
   width: 1rem;
   height: 1rem;
   list-style-type: none;
 }
 /* line 60, ../sass/styles.scss */
-#slideshow nav li > a {
+.slideshow nav li > a {
   display: inline-block;
   width: 50%;
   height: 50%;
@@ -142,25 +142,25 @@ a {
   border-radius: 15px;
 }
 /* line 66, ../sass/styles.scss */
-#slideshow nav li > a.active {
+.slideshow nav li > a.active {
   background: #565656;
   transition: background 1s;
 }
 /* line 71, ../sass/styles.scss */
-#slideshow figure.show {
+.slideshow figure.show {
   opacity: 1;
   position: static;
   transition: 1s opacity;
 }
 /* line 76, ../sass/styles.scss */
-#slideshow .prev, #slideshow .next {
+.slideshow .prev, .slideshow .next {
   display: inline-block;
   cursor: pointer;
   width: 150px;
   height: 50px;
 }
 /* line 83, ../sass/styles.scss */
-#slideshow .prev a, #slideshow .next a {
+.slideshow .prev a, .slideshow .next a {
   cursor: pointer;
   width: 150px;
   height: 50px;

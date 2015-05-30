@@ -1,107 +1,92 @@
-// addEvent Polyfill
-var addEvent = function(element, type, callback){
-    if (element.attachEvent) {
-        element.attachEvent("on" + type, callback);
-        addEvent = function(element, type, callback){
-            element.attachEvent("on" + type, callback);
-        }
-    }
-    else {
-        element.addEventListener(type, callback, false);
-        addEvent = function(element, type, callback){
-            element.addEventListener(type, callback, false);
-        }
-    }
-};
-
-
-
-
 // Instance of the new Object : Slider
-var Slider = function(id){
+var Slider = function(slideshow){
 
   // Check to see if the current page contains a PDF preview    
  // if (document.querySelectorAll(".pdf-preview")) {
 
 
+    // properties declalration
+    this.slideshow = document.getElementById(slideshow);
+    this.nav = this.slideshow.getElementsByTagName('nav')[0];
+    this.previews = this.slideshow.getElementsByTagName('figure');
 
-    var id =slideshow.getAttribute(id);
 
-    // vars 
-    var slideshow = document.getElementById(id),
-        nav = slideshow.getElementsByTagName('nav')[0],
-        previews = slideshow.getElementsByTagName('figure');
-            
-    if(previews){
+    this.initSlider();
+
+}
+
+Slider.prototype.initSlider = function(){
+
+    if(this.previews.length != 0){
+
         //Show the first image
-        previews[0].classList.add("show");
+        this.previews[0].classList.add("show");
+
+        var that = this;
 
         // Iterate the previews
-        Array.prototype.forEach.call(previews, function (preview, i) {
+        Array.prototype.forEach.call(this.previews, function (preview, i) {
 
             // Create footer circular icon
             var li = document.createElement("li");
             li.innerHTML = '<a href="#"></a>';
-            
-            //hightlight the first icon
-            if(i == 0){
-                li.classList.add('centered-btns_here');
-            } 
 
-            nav.firstChild.appendChild(li);
-            this.bullets = nav.getElementsByTagName('a');
-     
+            that.nav.firstChild.appendChild(li);
+            var bullets = that.nav.getElementsByTagName('a');
+
             //Show the first image
             bullets[0].classList.add("active");
 
             var liLink = li.firstChild;
 
-            var that = this;
-
             //Bind click event
             liLink.addEventListener("click", function (e) {
+
                 e.preventDefault();
+              
                 //show selected image
-                showSelectedImage(i, that.bullets);
+                that.showSelectedImage(i, bullets);
+
                 this.classList.add("active");
             });
         });
     }
 
+}
+
+Slider.prototype.showSelectedImage =  function(index, bullets){
+
+    this.bullets = bullets;
+
+    Array.prototype.forEach.call(this.previews, function (preview, i) {
+        if(i === index) {
+            preview.classList.add("show");
+        } else {
+            preview.classList.remove("show");
+        }
+    });
+
+    Array.prototype.forEach.call(this.bullets, function (bullet, i) {
 
 
-    function showSelectedImage(index) {
-
-        Array.prototype.forEach.call(previews, function (preview, i) {
-            if(i === index) {
-                preview.classList.add("show");
-            } else {
-                preview.classList.remove("show");
-            }
-        });
-
-        Array.prototype.forEach.call(bullets, function (bullet, i) {
-            if(i === index) {
-                //bullet.classList.add("active");
-            } else {
-                bullet.classList.remove("active");
-            }
-        });
-    }
-
-
- // }
-
-
+        if(i === index) {
+            //bullet.classList.add("active");
+        } else {
+            console.log(bullet)
+            bullet.classList.remove("active");
+        }
+    });
 
 };
+
+
 // On Load
-addEvent(window, 'load', function(){
+//addEvent(window, 'load', function(){
 
-  var slider = new Slider('slideshow-1');
-  //var slider2 = new Slider('slideshow-2');
+  var slider1 = new Slider('slideshow-1');
+  var slider2 = new Slider('slideshow-2');
 
-});
+//});
 
 
 
