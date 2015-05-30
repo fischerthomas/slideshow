@@ -12,7 +12,7 @@ var Slider = function(slideshow){
         nav = slideshow.getElementsByTagName('nav')[0],
         previews = slideshow.getElementsByTagName('figure');
             
-    if(previews){
+    if(previews.length != 0){
         //Show the first image
         previews[0].classList.add("show");
 
