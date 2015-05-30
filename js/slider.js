@@ -1,34 +1,14 @@
-// addEvent Polyfill
-var addEvent = function(element, type, callback){
-    if (element.attachEvent) {
-        element.attachEvent("on" + type, callback);
-        addEvent = function(element, type, callback){
-            element.attachEvent("on" + type, callback);
-        }
-    }
-    else {
-        element.addEventListener(type, callback, false);
-        addEvent = function(element, type, callback){
-            element.addEventListener(type, callback, false);
-        }
-    }
-};
-
-
 
 
 // Instance of the new Object : Slider
-var Slider = function(id){
+var Slider = function(slideshow){
 
   // Check to see if the current page contains a PDF preview    
  // if (document.querySelectorAll(".pdf-preview")) {
 
 
-
-    var id =slideshow.getAttribute(id);
-
     // vars 
-    var slideshow = document.getElementById(id),
+    var slideshow = document.getElementById(slideshow),
         nav = slideshow.getElementsByTagName('nav')[0],
         previews = slideshow.getElementsByTagName('figure');
             
@@ -43,13 +23,9 @@ var Slider = function(id){
             var li = document.createElement("li");
             li.innerHTML = '<a href="#"></a>';
             
-            //hightlight the first icon
-            if(i == 0){
-                li.classList.add('centered-btns_here');
-            } 
 
             nav.firstChild.appendChild(li);
-            this.bullets = nav.getElementsByTagName('a');
+            var bullets = nav.getElementsByTagName('a');
      
             //Show the first image
             bullets[0].classList.add("active");
@@ -62,7 +38,7 @@ var Slider = function(id){
             liLink.addEventListener("click", function (e) {
                 e.preventDefault();
                 //show selected image
-                showSelectedImage(i, that.bullets);
+                showSelectedImage(i, bullets);
                 this.classList.add("active");
             });
         });
@@ -70,7 +46,7 @@ var Slider = function(id){
 
 
 
-    function showSelectedImage(index) {
+    function showSelectedImage(index, bullets) {
 
         Array.prototype.forEach.call(previews, function (preview, i) {
             if(i === index) {
@@ -95,13 +71,11 @@ var Slider = function(id){
 
 
 };
-// On Load
-addEvent(window, 'load', function(){
+
 
   var slider = new Slider('slideshow-1');
-  //var slider2 = new Slider('slideshow-2');
+  var slider2 = new Slider('slideshow-2');
 
-});
 
 
 
