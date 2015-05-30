@@ -1,92 +1,81 @@
-// Instance of the new Object : Slider
-var Slider = function(slideshow){
+// Instance of the new Object : Slideshow
+var Slideshow = function(slideshow){
 
-  // Check to see if the current page contains a PDF preview    
- // if (document.querySelectorAll(".pdf-preview")) {
+    // Properties declalration
+    this.slideshow = document.getElementById(slideshow);            // get the slideshow element
+    this.nav = this.slideshow.getElementsByTagName('nav')[0];       // get the slideshow > nav element
+    this.slides = this.slideshow.getElementsByTagName('figure');    // get the slideshow > slide elements
 
-
-    // properties declalration
-    this.slideshow = document.getElementById(slideshow);
-    this.nav = this.slideshow.getElementsByTagName('nav')[0];
-    this.previews = this.slideshow.getElementsByTagName('figure');
-
-
-    this.initSlider();
-
+    // Method call
+    if(this.slides.length != 0){
+        this.initSlideshow();
+    }
 }
 
-Slider.prototype.initSlider = function(){
+// Init the Slideshow
+Slideshow.prototype.initSlideshow = function(){
 
-    if(this.previews.length != 0){
+    //Show the first Slide
+    this.slides[0].classList.add("show");
+
+     var that = this;
+
+    // Iterate the previews
+    Array.prototype.forEach.call(this.slides, function (slide, i) {
+
+        // Create the nav
+        var li = document.createElement("li");
+        li.innerHTML = '<a href="#"></a>';
+
+        that.nav.firstChild.appendChild(li);
+        var bullets = that.nav.getElementsByTagName('a');
 
         //Show the first image
-        this.previews[0].classList.add("show");
+        bullets[0].classList.add("active");
 
-        var that = this;
+        var liLink = li.firstChild;
 
-        // Iterate the previews
-        Array.prototype.forEach.call(this.previews, function (preview, i) {
+        //Bind click event
+        liLink.addEventListener("click", function (e) {
 
-            // Create footer circular icon
-            var li = document.createElement("li");
-            li.innerHTML = '<a href="#"></a>';
+            e.preventDefault();
 
-            that.nav.firstChild.appendChild(li);
-            var bullets = that.nav.getElementsByTagName('a');
+            //show selected image
+            that.showSelectedImage(i, bullets);
 
-            //Show the first image
-            bullets[0].classList.add("active");
-
-            var liLink = li.firstChild;
-
-            //Bind click event
-            liLink.addEventListener("click", function (e) {
-
-                e.preventDefault();
-              
-                //show selected image
-                that.showSelectedImage(i, bullets);
-
-                this.classList.add("active");
-            });
         });
-    }
+    });
 
 }
 
-Slider.prototype.showSelectedImage =  function(index, bullets){
+Slideshow.prototype.showSelectedImage =  function(index, bullets){
 
     this.bullets = bullets;
 
-    Array.prototype.forEach.call(this.previews, function (preview, i) {
+    Array.prototype.forEach.call(this.slides, function (slide, i) {
         if(i === index) {
-            preview.classList.add("show");
+            slide.classList.add("show");
         } else {
-            preview.classList.remove("show");
+            slide.classList.remove("show");
         }
     });
 
     Array.prototype.forEach.call(this.bullets, function (bullet, i) {
 
-
-        if(i === index) {
-            //bullet.classList.add("active");
-        } else {
-            console.log(bullet)
+        if(i !== index) {
             bullet.classList.remove("active");
+        } else {
+            bullet.classList.add("active");
         }
     });
 
 };
 
 
-// On Load
-//addEvent(window, 'load', function(){
 
-  var slider1 = new Slider('slideshow-1');
-  var slider2 = new Slider('slideshow-2');
+var slideshow1 = new Slideshow('slideshow-1');
+var slideshow2 = new Slideshow('slideshow-2');
 
-//});
 
 
 
