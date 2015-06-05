@@ -112,8 +112,8 @@ Slider.prototype.showSelectedImage =  function(index, bullets){
 
 
 
-  var slider1 = new Slider('slideshow-1', false);
-  //var slider2 = new Slider('slideshow-2');
+  var slider1 = new Slider('slideshow-1', true);
+  var slider2 = new Slider('slideshow-2');
 
 
 
