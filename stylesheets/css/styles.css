@@ -17,6 +17,13 @@ body {
   text-align: center;
 }
 
+/* line 17, ../sass/styles.scss */
+#container-fluid-sample {
+  width: 50%;
+  display: inline-block;
+  text-align: center;
+}
+
 /* Slideshow */
 /* reset */
 /* line 5, ../../../../../Ruby21-x64/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
@@ -98,42 +105,55 @@ a {
   cursor: pointer;
 }
 
-/* line 32, ../sass/styles.scss */
+/* line 37, ../sass/styles.scss */
 .slideshow {
   position: relative;
   display: inline-block;
   overflow: hidden;
   width: 50%;
+  /* 	.prev, .next{
+  		display: inline-block;
+  		cursor: pointer;
+  		width: 150px;
+  		height: 50px;
+  	}
+  
+  	.prev a, .next a{
+  		cursor: pointer;
+  		width: 150px;
+  		height: 50px;
+  	}
+   */
 }
-/* line 37, ../sass/styles.scss */
+/* line 42, ../sass/styles.scss */
 .slideshow figure {
   position: absolute;
   opacity: 0;
   transition: 1s opacity;
   top: 0;
 }
-/* line 43, ../sass/styles.scss */
+/* line 48, ../sass/styles.scss */
 .slideshow figcaption {
   position: absolute;
 }
-/* line 46, ../sass/styles.scss */
+/* line 51, ../sass/styles.scss */
 .slideshow .wrapper, .slideshow nav {
   display: inline-block;
 }
-/* line 49, ../sass/styles.scss */
+/* line 54, ../sass/styles.scss */
 .slideshow nav {
   position: relative;
   width: 100%;
   text-align: center;
 }
-/* line 54, ../sass/styles.scss */
+/* line 59, ../sass/styles.scss */
 .slideshow nav > ul > li {
   display: inline-block;
   width: 1rem;
   height: 1rem;
   list-style-type: none;
 }
-/* line 60, ../sass/styles.scss */
+/* line 65, ../sass/styles.scss */
 .slideshow nav li > a {
   display: inline-block;
   width: 50%;
@@ -141,27 +161,14 @@ a {
   background: #a3a3a3;
   border-radius: 15px;
 }
-/* line 66, ../sass/styles.scss */
+/* line 71, ../sass/styles.scss */
 .slideshow nav li > a.active {
   background: #565656;
   transition: background 1s;
 }
-/* line 71, ../sass/styles.scss */
+/* line 76, ../sass/styles.scss */
 .slideshow figure.show {
   opacity: 1;
   position: static;
   transition: 1s opacity;
-}
-/* line 76, ../sass/styles.scss */
-.slideshow .prev, .slideshow .next {
-  display: inline-block;
-  cursor: pointer;
-  width: 150px;
-  height: 50px;
-}
-/* line 83, ../sass/styles.scss */
-.slideshow .prev a, .slideshow .next a {
-  cursor: pointer;
-  width: 150px;
-  height: 50px;
 }
