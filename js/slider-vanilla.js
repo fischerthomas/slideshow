@@ -1,7 +1,7 @@
 /*
 
 
-    SlideShow: write test
+    SlideShow:
     
 */
 
@@ -18,8 +18,8 @@ var Slider = function(slideshow){
     this.currentPreview = 0;
 
     // Get the Slideshows Options via its data-attribute
-    var dataOptions = this.$slideshow.data('options');
-    this.options = dataOptions ? dataOptions.split(/\s+/) : false;
+    this.dataOptions = this.$slideshow.data('options');
+
 
     // init the slider
     this.initSlider();
@@ -72,12 +72,12 @@ Slider.prototype.initSlider = function(){
 
 
     // check Options
-    if(this.options){
+    if(this.dataOptions){
 
         // AutoPlay
-        if(this.options.indexOf("autoplay") > -1){
+        if(this.dataOptions.autoplay){
 
-            var speed = (this.options.length>1) ? this.options[1] : 2000;
+            var speed = this.dataOptions.autoplay ? this.dataOptions.autoplay : 2000;
 
             this.autoplay(speed);
         }
@@ -144,8 +144,9 @@ Slider.prototype.showSelectedSlide =  function(index, bullets){
 (function($){
 
     // If there is more than 1 slideshow in the same page, give them different id
+ 
     var slider1 = new Slider('slideshow-1');
-    var slider2 = new Slider('slideshow-2');
+    var slider2 = new Slider();
 
 
 })(jQuery);
