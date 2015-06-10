@@ -33,10 +33,11 @@ var Slider = function(slideshow){
     // properties declaration
     this.slideshow = slideshow ? document.getElementById(slideshow) : document.getElementsByClassName('slideshow')[0];
     this.nav = this.slideshow.getElementsByTagName('nav')[0];
+    this.navUl = this.slideshow.getElementsByTagName('ul')[0];
     this.previews = this.slideshow.getElementsByTagName('figure');
     this.currentPreview = 0;
 
-
+console.log(this.navUl)
     // Get the Slideshows Options via its data-attribute
     var dataOptions = this.slideshow.getAttribute('data-options');
     this.options = dataOptions ? dataOptions.split(/\s+/) : false;
@@ -65,8 +66,8 @@ Slider.prototype.initSlider = function(){
             li.innerHTML = '<a href="#"></a>';
 
 
-            that.nav.getElementsByTagName("ul")[0].appendChild(li);
-            that.bullets = that.nav.getElementsByTagName('a');
+            that.navUl.appendChild(li);
+            that.bullets = that.navUl.getElementsByTagName('a');
 
             //Show the first image
             that.bullets[0].classList.add("active");
@@ -76,6 +77,40 @@ Slider.prototype.initSlider = function(){
             // closure
             (function(index){
 
+                if (document.addEventListener) {       
+                         // For all major browsers, except IE 8 and earlier
+                    liLink.addEventListener("click", function (e) {
+
+                        e.preventDefault();
+                        
+                        // if the slideshow is autPlaying stop it
+                        if(that.autoplayTimer){
+                            window.clearInterval(that.autoplayTimer);
+                        }
+                        //show selected image
+                        that.showSelectedSlide(index, that.bullets);
+
+                    });
+                } 
+                else if (document.attachEvent) {  
+                            // For IE 8 and earlier versions
+                    liLink.attachEvent("onclick", function (e) {
+
+                        e.preventDefault();
+                        
+                        // if the slideshow is autPlaying stop it
+                        if(that.autoplayTimer){
+                            window.clearInterval(that.autoplayTimer);
+                        }
+                        //show selected image
+                        that.showSelectedSlide(index, that.bullets);
+
+                    });
+                }
+
+
+
+/*
                 //Bind click event
                 liLink.addEventListener("click", function (e) {
 
@@ -89,7 +124,7 @@ Slider.prototype.initSlider = function(){
                     that.showSelectedSlide(index, that.bullets);
 
                 });
-       
+       */
 
             })(i)
 
