@@ -1,18 +1,31 @@
+/*
+
+    SlideShow: 
+    
+*/
+
+
 // Instance of the new Object : Slider
-var Slider = function(slideshow, autoPlay){
+var Slider = function(slideshow){
 
 
-    // properties declalration
+    // properties declaration
     this.slideshow = document.getElementById(slideshow);
     this.nav = this.slideshow.getElementsByTagName('nav')[0];
     this.previews = this.slideshow.getElementsByTagName('figure');
-    this.autoPlay = autoPlay;
-
     this.currentPreview = 0;
+
+
+    // Get the Slideshows Options via its data-attribute
+    var dataOptions = this.slideshow.getAttribute('data-options');
+    this.options = dataOptions ? dataOptions.split(/\s+/) : false;
+
+    // init the slider
     this.initSlider();
 
 }
 
+// Init Slider
 Slider.prototype.initSlider = function(){
 
     if(this.previews.length != 0){
@@ -43,49 +56,65 @@ Slider.prototype.initSlider = function(){
             liLink.addEventListener("click", function (e) {
 
                 e.preventDefault();
-              
+                
+                // if the slideshow is autPlaying stop it
+                if(that.autoplayTimer){
+                    window.clearInterval(that.autoplayTimer);
+                }
                 //show selected image
-                that.showSelectedImage(i, that.bullets);
+                that.showSelectedSlide(i, that.bullets);
 
-                //this.classList.add("active");
             });
         });
 
-
     }
 
-    if(this.autoPlay){
-        this.play();
+
+    // check Options
+    if(this.options){
+
+        // AutoPlay
+        if(this.options.indexOf("autoplay") > -1){
+
+            var speed = (this.options.length>1) ? this.options[1] : 2000;
+
+            this.autoplay(speed);
+        }
+
     }
 
 }
 
-Slider.prototype.play =  function(){
+// AutoPLay
+Slider.prototype.autoplay =  function(speed){
+
     var that = this;
 
-    window.setInterval(function(){
+    this.autoplayTimer = window.setInterval(function(){
 
-        that.next(that.currentPreview, that.bullets);
+        next(that.currentPreview, that.bullets);
 
-    },2000);
-}
+    },speed);
 
+    // next Slide
+    function next(num){
 
-Slider.prototype.next = function(num){
+        that.showSelectedSlide(num, that.bullets)
 
-    var that = this;
+        that.currentPreview +=1;
+        
+        if(that.currentPreview > that.previews.length-1){
 
-    this.showSelectedImage(num, that.bullets)
+            that.currentPreview = 0;
+        }
 
-    that.currentPreview +=1;
-    
-    if(that.currentPreview > this.previews.length-1){
-
-        that.currentPreview = 0;
     }
+
 }
 
-Slider.prototype.showSelectedImage =  function(index, bullets){
+
+// Show Selected Slide
+Slider.prototype.showSelectedSlide =  function(index, bullets){
 
     //this.bullets = bullets;
 
@@ -112,8 +141,10 @@ Slider.prototype.showSelectedImage =  function(index, bullets){
 
 
 
-  var slider1 = new Slider('slideshow-1', true);
-  var slider2 = new Slider('slideshow-2');
+// If there is more than 1 slideshow in the same page, give them different id
+var slider1 = new Slider('slideshow-1');
+var slider2 = new Slider('slideshow-2');
+
 
 
 
