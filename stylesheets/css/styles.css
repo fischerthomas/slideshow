@@ -149,8 +149,6 @@ a {
 /* line 59, ../sass/styles.scss */
 .slideshow nav > ul > li {
   display: inline-block;
-  width: 15px;
-  height: 15px;
   width: 1rem;
   height: 1rem;
   list-style-type: none;
