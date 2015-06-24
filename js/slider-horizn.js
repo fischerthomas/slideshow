@@ -1,7 +1,5 @@
 /*
-
-
-    SlideShow: write test
+    SlideShow
     
 */
 
@@ -11,15 +9,15 @@ var Slider = function(slideshow){
 
     // properties declaration 
     var $slideshow = $('#'+ slideshow);
-
     this.$slideshow = slideshow ? $slideshow : $('.slideshow:first');
     this.$nav = this.$slideshow.find('nav');
     this.$previews = this.$slideshow.find('figure');
     this.currentPreview = 0;
 
-    // Get the Slideshows Options via its data-attribute
-    var dataOptions = this.$slideshow.data('options');
-    this.options = dataOptions ? dataOptions.split(/\s+/) : false;
+    this.defaultOptions = {speed: 2000}
+
+    // Get the Slideshow Options object via its data-attribute
+    this.dataOptions = this.$slideshow.data('options');
 
     // init the slider
     this.initSlider();
@@ -31,26 +29,24 @@ Slider.prototype.initSlider = function(){
 
     if(this.$previews.length != 0){
 
-        //Show the first image
-        this.$previews.first().addClass("show");
 
         var that = this;
-
 
         // Iterate the previews
         this.$previews.each(function (i) {
 
-            // Create footer circular icon
+            // Create the nav
             var $li = $('<li></li>');
             $li.append('<a href="#"></a>');
-
             that.$nav.find('ul').append($li);
+
+            // Declare var for the navigation
             that.$bullets = that.$nav.find('a');
+            var $liLink = $li.find('a');
 
             //Show the first image
+            that.$previews.first().addClass("show");
             that.$bullets.first().addClass("active");
-
-            var $liLink = $li.find('a');
 
 
             //Bind click event
@@ -58,10 +54,11 @@ Slider.prototype.initSlider = function(){
 
                 e.preventDefault();
                 
-                // if the slideshow is autPlaying stop it
+                // if the slideshow is autoPlaying: stop it
                 if(that.autoplayTimer){
                     window.clearInterval(that.autoplayTimer);
                 }
+           
                 //show selected image
                 that.showSelectedSlide(i, that.$bullets);
 
@@ -70,20 +67,25 @@ Slider.prototype.initSlider = function(){
 
     }
 
+    // check if there is some options called
+    if(this.dataOptions){
 
-    // check Options
-    if(this.options){
+        if(typeof this.dataOptions === 'object'){
+            // AutoPlay
+            if(this.dataOptions.autoplay){
 
-        // AutoPlay
-        if(this.options.indexOf("autoplay") > -1){
+                var speed = this.dataOptions.autoplay ? this.dataOptions.autoplay : this.defaultOptions.speed;
+                // AutoPlay
+                this.autoplay(speed);
+            }       
+        }else if(this.dataOptions === 'autoplay'){
 
-            var speed = (this.options.length>1) ? this.options[1] : 2000;
-
-            this.autoplay(speed);
-        }
+                var speed = this.defaultOptions.speed;
+                // AutoPlay
+                this.autoplay(speed);
+        }else{}
 
     }
-
 }
 
 // AutoPLay
@@ -92,9 +94,7 @@ Slider.prototype.autoplay =  function(speed){
     var that = this;
 
     this.autoplayTimer = window.setInterval(function(){
-
         next(that.currentPreview, that.$bullets);
-
     },speed);
 
     // next Slide
@@ -108,23 +108,20 @@ Slider.prototype.autoplay =  function(speed){
 
             that.currentPreview = 0;
         }
-
     }
-
 }
 
 
 // Show Selected Slide
 Slider.prototype.showSelectedSlide =  function(index, bullets){
 
-    //this.bullets = bullets;
     var that = this;
     this.$previews.each(function (i) {
 
         if(i === index) {
-            that.$slideshow.find("figure:eq("+ (i) + ")").addClass("show");
+            that.$slideshow.find("figure:eq("+ i + ")").addClass("show");
         } else {
-            that.$slideshow.find("figure:eq("+ (i) + ")").removeClass("show");
+            that.$slideshow.find("figure:eq("+ i + ")").removeClass("show");
         }
     });
 
@@ -132,9 +129,9 @@ Slider.prototype.showSelectedSlide =  function(index, bullets){
     this.$bullets.each(function (i) {
 
         if(i === index) {
-            that.$slideshow.find("a:eq("+ (i) + ")").addClass("active");
+            that.$slideshow.find("a:eq("+ i + ")").addClass("active");
         } else {
-            that.$slideshow.find("a:eq("+ (i) + ")").removeClass("active");
+            that.$slideshow.find("a:eq("+ i + ")").removeClass("active");
         }
     });
 
@@ -149,6 +146,3 @@ Slider.prototype.showSelectedSlide =  function(index, bullets){
 
 
 })(jQuery);
-
-
-

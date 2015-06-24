@@ -4,8 +4,11 @@
 <title>PDF Slider</title>
 
     <link href="stylesheets/css/styles.css" rel="stylesheet" type="text/css" />
+  	<!--[if lt IE 9]>
+		<script src="js/lib/html5shiv.js"></script>
+    	<link href="stylesheets/css/styles-ie8.css" rel="stylesheet" type="text/css" />
+	<![endif]-->
 </head>
-
 <body>
 	
 
@@ -16,7 +19,7 @@
 		<div id="container-fluid-sample">
 
 			<!-- Slider -->
-			<div id="slideshow-1" class="slideshow" data-options="autoplay 1500">
+			<div id="slideshow-1" class="slideshow" data-options='{"autoplay": 1500}'>
 				<!-- slides -->
 				<div class="slideshow-wrapper">
 					<figure><img src="img/Moto X Sell Sheet_1.png" alt="" width="100%" /><figcaption></figcaption></figure>
@@ -51,7 +54,8 @@
 
 	</div>
 
-  <script src="js/slider-vanilla.js"></script>
 </body>
 
+  <script src="js/lib/jquery.min.js"></script>
+  <script src="js/slider-horizn.js"></script>
 </html>

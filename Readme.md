@@ -1,93 +1,59 @@
-Readme
+# Set Up #
 
-vanilla slider
+## Step 1: include the slider-horizn.js Javascript and its Css (or Sass) files in the page ##
 
-refactor pdf preview to remove heavy dependency on bloated plugin
+It's recommended to put the .js file before the end body tag (</body>).
 
+**For IE 8:** Use conditional comments to include a specific stylesheet for ie8 and an 'HTML5 Shiv' in the head to respect nav, figure and figcaption tags as valid elements:
 
-communicating how many images are available ad what relative image the user is currently viewing. The code for this is implemented on a page by page basis using a feature-rich jQuery plugin.
+	<!--[if lt IE 9]>
+	<script src="js/lib/html5shiv.js"></script>
+    <link href="stylesheets/css/styles-ie8.css" rel="stylesheet" type="text/css" />
+	<![endif]-->
 
-The jQuery plugin dependency should be removed and replaced with semantic markup that can be targeted by a function to reside in our new global mi.min.js script. Whenever this markup is targeted appropriate click/tap events will be bound.
+**Dependency:** jQuery (IE8 support was dropped in jQuery 2.x, so you will use any version beginning with 1. to support it).
 
-Acceptance Criteria
+To change easily the size of the slideshow and the size and the color of the bullets, use the Sass variables
 
-No dependency on jQuery
-No plugins required
-VanillaJS
-Code to apply functionality exists only once and only in a new global JavaScript file that will be loaded on all page
+    $slideshow-width: 50%;
+    $bullet-color: rgba(163,163,163, 1);
+    $bullet-size: 1rem;
+    
+## Step 2: Add one (or more) Slider to your page ##
 
-The following is pseudo code only. It has not been tested and is recommended approach. The key concepts are:
-
-Using semantic markup and meaningful class names over ids
-Using document.querySelectorAll which eliminates to a great extent the need for jQuery's $() function
-Using addEventListener for event binding
-
-Pseudo Markup
-
-<div class="pdf-preview">
-   <div class="preview-image">
-      <img src="path-to-image" />
-   </div>
-   <div class="preview-image">
-      <img src="path-to-image" />
-   </div>
-   <div class="preview-image">
-      <img src="path-to-image" />
-   </div>
-   <div class="footer"></div>
-</div>
+    <!-- Slider -->
+    <div id="" class="slideshow" data-options=''>
+    	<!-- slides -->
+    	<div class="slideshow-wrapper">
+    		<figure><img src="image.png" alt="" width="100%" /><figcaption></figcaption></figure>
+    		<figure><img src="image.png" alt="" width="100%" /><figcaption></figcaption></figure>
+    		<figure><img src="image.png" alt="" width="100%" /><figcaption></figcaption></figure>
+    		<figure><img src="image.png" alt="" width="100%" /><figcaption></figcaption></figure>
+    	</div>
+    	<!-- nav -->
+		<nav><ul></ul></nav>
+	</div>
 
 
-Pseudo CSS
+1. If there is more than one slideshow in the page, it's necessary to add a specific Id for each slideshow. *e.g.* `"slideshow-1", "slideshow-2"`
+2. the figcaption and the nav element are optional.
+3. You can specify the slideshow options via its data-option Attribute as a string or an Object.
 
-.pdf-preview {
-   width: 123px;
-   height: 123px;
-}
+**Options:** At this time, we can only choose to add an "auto-play functionality" by passing to the Slideshow a string, or an Object to specify the speed. *e.g.* 
 
-   .pdf-preview .preview-image {
-      width: 123px;
-      height: 123px;
-   }
-
-   .pdf-preview .footer {
-      width: 123px;
-      height: 123px;
-   }
-
-      .pdf-preview .footer image {
-         /* Could be from a CSS sprite */
-      }
-
-         .pdf-preview .footer image current {
-            /* Could be from a CSS sprite */
-         }
+    data-options='autoplay' or data-options='{"autoplay": 1500}'
 
 
-Pseudo JavaScript
+## Step 3: Instantiate the slider(s) in your main.js  ##
 
-// This would appear after the DOM has safely loaded (e.g. bottom of the page)
+If there is more than one slider per page you will have to pass their id names to the new Objects. *e.g.*
 
-// Check to see if the current page contains a PDF preview
-if (document.querySelectorAll(".pdf-preview")) {
-   // Get a reference to the footer of the preview
-   var footer = document.querySelectorAll(".pdf-preview.footer");
-   // Get an array of all the preview images (e.g. between 1 and 4)
-   var previews = document.querySelectorAll(".pdf-preview.preview-image");
-   // Iterate the previews
-   Array.prototype.forEach.call(previews, function (preview, i) {
-      // Bind click
-      document.addEventListener("click", function (e) {
-         // Show opaque background
-         // Show image enlarged
-         // Eg. a basic lightbox pattern
-         // Don't forget to bind a body click to hide the image and opaque background to exit the lightbox
-      });
-      // Create footer circular icon
-      var div = document.createElement("div");
-      // Set background to the image in the CSS sprite
-      // Bind a click event handler that selects the corresponding image and 
-      // changes the CSS sprite to show the selected image
-      footer.appendElement(div);
-   });
-}
+    (function($){
+    	var slider1 = new Slider('slideshow-1');
+    	var slider2 = new Slider('slideshow-2');
+    })(jQuery);
+or
+
+    (function($){
+    	var slider = new Slider();
+    })(jQuery);
