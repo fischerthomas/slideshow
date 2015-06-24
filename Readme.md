@@ -13,6 +13,12 @@ It's recommended to put the .js file before the end body tag (</body>).
 
 **Dependency:** jQuery (IE8 support was dropped in jQuery 2.x, so you will use any version beginning with 1. to support it).
 
+To change easily the size of the slideshow and the size and the color of the bullets, use the Sass variables
+
+    $slideshow-width: 50%;
+    $bullet-color: rgba(163,163,163, 1);
+    $bullet-size: 1rem;
+    
 ## Step 2: Add one (or more) Slider to your page ##
 
     <!-- Slider -->
